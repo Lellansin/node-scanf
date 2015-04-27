@@ -8,7 +8,7 @@ npm install scanf
 
 ## Example
 
-```
+```javascript
 var scanf = require('scanf');
 
 console.log('Pleas input your name');
@@ -19,9 +19,11 @@ var age = scanf('%d');
 
 console.log('your name [%s] type: [%s]', name, typeof name);
 console.log('your age [%s] type: [%s]', age, typeof age);
-```javascript
+```
+
 
 output
+
 
 ```
 Pleas input your name
