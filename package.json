@@ -1,13 +1,13 @@
 {
   "name": "scanf",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "c like scanf module for node.js",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./tests"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,9 @@
   "bugs": {
     "url": "https://github.com/Lellansin/node-scanf/issues"
   },
-  "homepage": "https://github.com/Lellansin/node-scanf"
+  "homepage": "https://github.com/Lellansin/node-scanf",
+  "devDependencies": {
+    "mocha": "^2.2.4",
+    "should": "^6.0.1"
+  }
 }

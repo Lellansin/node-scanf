@@ -1,2 +1,3 @@
 *.c
 *.out
+node_modules
