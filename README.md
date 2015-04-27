@@ -36,10 +36,10 @@ Output
 
 ```
 Pleas input your name
-> Alan
+> Barack\ Obama
 Pleas input your age
 > 24
-your name [Alan] type: [string]
+your name [Barack Obama] type: [string]
 your age [24] type: [number]
 ```
 
