@@ -1,13 +1,24 @@
 # node-scanf
-c like scanf module for node.js
+C like scanf module for node.js.
+
+If there are some formats not support or go broken, you can contact author with email `lellansin@gmail.com`.
 
 ## Installation
 ```
 npm install scanf
 ```
 
+## Format support now
+
+* `%d` - integer
+* `%f` - float
+* `%s` - string
+* `%x` - hex
+* `%o` - octal
+
 ## Example
 
+### Quickly start
 ```javascript
 var scanf = require('scanf');
 
@@ -33,6 +44,7 @@ your age [24] type: [number]
 ```
 
 
+### C like format
 ```javascript
 var scanf = require('scanf');
 
