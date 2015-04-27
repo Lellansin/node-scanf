@@ -61,3 +61,62 @@ when are you born? (Year-month-day)
 > 1990-01-01
 your birthday [1990,1,1]
 ```
+
+## Return
+
+### Directly return
+
+```javascript
+var scanf = require('scanf');
+
+var number = scanf('%d');
+
+console.log('number', number);
+```
+
+Output
+
+```
+>> 2015    
+number 2015
+```
+
+### Array return
+
+```javascript
+var scanf = require('scanf');
+
+var result = scanf('%s%d%d');
+
+console.log('result', result);
+```
+
+Output
+
+```
+>> Alan 24 180        
+result [ 'Alan', 24, 180 ]
+```
+
+### Json return
+
+```javascript
+var scanf = require('scanf');
+
+var result = scanf('%d %f %s %x %o', 'integer', 'float', 'string', 'hex', 'octal');
+
+console.log('result', result);
+```
+
+Output
+
+```
+>> 12 3.1415926 hello 1F 10    
+result { 
+  integer: 12,
+  float: 3.1415926,
+  string: 'hello',
+  hex: 31,
+  octal: 8 
+}
+```
