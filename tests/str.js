@@ -28,6 +28,21 @@ describe('scanf', function() {
       done();
     });
 
+    // 
+    // todo
+    // 
+    it('[%s] \t\tshould get a string Barack Hussein Obama', function(done) {
+      var str = sscanf('Barack\\ Hussein\\ Obama', '%s');
+      should.strictEqual(str, 'Barack Hussein Obama');
+      done();
+    });
+
+    it('[%s] \t\tshould get a string Barack F Obama', function(done) {
+      var str = sscanf('Barack\\ F\\ Obama', '%s');
+      should.strictEqual(str, 'Barack Obama');
+      done();
+    });
+
     it('[%s] \t\tshould get a string 12abc', function(done) {
       var str = sscanf(' 12abc', '%s');
       should.strictEqual(str, '12abc');
@@ -49,17 +64,16 @@ describe('scanf', function() {
     // 
     // todo
     // 
-    
-    // it('[%s,%s] \tshould get an array with two strings [\'Alan\', \'6\']', function(done) {
-    //   var str = sscanf('Alan,6', '%s,%s');
-    //   should.deepEqual(str, ['Alan', '6']);
-    //   done();
-    // });
+    it('[%s,%s] \tshould get an array with two strings [\'Alan\', \'6\']', function(done) {
+      var str = sscanf('Alan,6', '%s,%s');
+      should.deepEqual(str, ['Alan', '6']);
+      done();
+    });
 
-    // it('[a=%s, b=%s] \tshould get an array with two strings [\'Alan\', \'6\']', function(done) {
-    //   var str = sscanf('a=Alan, b=6', 'a=%s, b=%s');
-    //   should.deepEqual(str, ['Alan', '6']);
-    //   done();
-    // });
+    it('[a=%s, b=%s] \tshould get an array with two strings [\'Alan\', \'6\']', function(done) {
+      var str = sscanf('a=Alan, b=6', 'a=%s, b=%s');
+      should.deepEqual(str, ['Alan', '6']);
+      done();
+    });
   });
 });
