@@ -1,7 +1,8 @@
 # node-scanf [![NPM Version](https://badge.fury.io/js/scanf.svg)](http://badge.fury.io/js/scanf) [![Build Status](https://travis-ci.org/Lellansin/node-scanf.png?branch=master)](https://travis-ci.org/Lellansin/node-scanf)
-C like scanf module for node.js.
 
-If there are some formats not support or go broken, you can contact author with email `lellansin@gmail.com`.
+Do you want simplely shell script input which have formats and sync return?
+
+`scanf` is a C like scanf module for node.js which can help you with that.
 
 ## Installation
 ```
@@ -121,3 +122,28 @@ result {
   octal: 8 
 }
 ```
+
+## sscanf
+
+REPL
+```javascript
+>> var sscanf = require('scanf').sscanf;
+undefined
+>> sscanf('12 34', '%d');
+12
+>> sscanf('Alan 20 180', '%s%d%d')
+[ 'Alan', 20, 180 ]
+>> sscanf('12 3.1415926 hello', '%d %f %s', 'month', 'pi', 'world');
+{ month: 12, pi: 3.1415926, world: 'hello' }
+>> sscanf('   14   ??  Ss     0:07.59 /usr/sbin/securityd -i', '%d %s %s %s %s %s', 'pid', 'tty', 'stat', 'time', 'exec', 'param');
+{ pid: 14,
+  tty: '??',
+  stat: 'Ss',
+  time: '0:07.59',
+  exec: '/usr/sbin/securityd',
+  param: '-i' }
+```
+
+you can see the ./tests files for more detail.
+
+If there are some formats not support or go broken, you can contact author with email `lellansin@gmail.com`.
