@@ -38,7 +38,7 @@ describe('scanf', function() {
     });
 
     it('[%S] \t\tshould get a line', function(done) {
-      var str = sscanf('hello this is a line~', '%S');
+      var str = sscanf('hello this is a line~\nThis is the secned line', '%S');
       should.strictEqual(str, 'hello this is a line~');
       done();
     });
@@ -55,8 +55,8 @@ describe('scanf', function() {
       done();
     });
 
-    it('[hello %s] \tshould get a string world', function(done) {
-      var str = sscanf('hello world', 'hello %s');
+    it('[hello %s!] \tshould get a string world', function(done) {
+      var str = sscanf('hello world!', 'hello %s!');
       should.strictEqual(str, 'world');
       done();
     });
