@@ -1,4 +1,4 @@
-# node-scanf
+# node-scanf [![NPM Version](https://badge.fury.io/js/scanf.svg)](http://badge.fury.io/js/scanf) [![Build Status](https://travis-ci.org/Lellansin/node-scanf.png?branch=master)](https://travis-ci.org/Lellansin/node-scanf)
 C like scanf module for node.js.
 
 If there are some formats not support or go broken, you can contact author with email `lellansin@gmail.com`.
@@ -13,6 +13,7 @@ npm install scanf
 * `%d` - integer
 * `%f` - float
 * `%s` - string
+* `%S` - string of line
 * `%x` - hex
 * `%o` - octal
 
