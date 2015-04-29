@@ -37,9 +37,15 @@ describe('scanf', function() {
       done();
     });
 
+    it('[%S] \t\tshould get a line', function(done) {
+      var str = sscanf('hello this is a line~', '%S');
+      should.strictEqual(str, 'hello this is a line~');
+      done();
+    });
+
     it('[%s] \t\tshould get a string Barack F Obama', function(done) {
-      var str = sscanf('Barack\\ F\\ Obama', '%s');
-      should.strictEqual(str, 'Barack Obama');
+      var str = sscanf('Barack\\ Hussein\\ Obama is US president', '%s');
+      should.strictEqual(str, 'Barack Hussein Obama');
       done();
     });
 
