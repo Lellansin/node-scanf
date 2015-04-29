@@ -1,6 +1,6 @@
 {
   "name": "scanf",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "c like scanf module for node.js",
   "main": "index.js",
   "directories": {
@@ -15,9 +15,8 @@
   },
   "keywords": [
     "scanf",
-    "readSync",
-    "from",
-    "stdin"
+    "readSync from stdin",
+    "shell input"
   ],
   "author": "Lellansin",
   "license": "MIT",
