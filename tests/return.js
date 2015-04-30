@@ -27,5 +27,18 @@ describe('scanf', function() {
       });
       done();
     });
+
+    it('[%d %s %s %s %s %S] should return a json', function(done) {
+      var result = sscanf('   14   ??  Ss     0:07.59 /usr/sbin/securityd -i -j -k -l', '%d %s %s %s %s %S', 'pid', 'tty', 'stat', 'time', 'exec', 'param');
+      should.deepEqual(result, {
+        pid: 14,
+        tty: '??',
+        stat: 'Ss',
+        time: '0:07.59',
+        exec: '/usr/sbin/securityd',
+        param: '-i -j -k -l'
+      });
+      done();
+    });
   });
 });
