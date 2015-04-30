@@ -16,6 +16,12 @@ describe('scanf', function() {
       done();
     });
 
+    it('[%d%d] \t\tshould get [NaN, 3]', function(done) {
+      var num = sscanf('a 3.14', '%d%d');
+      should.deepEqual(num, [NaN, 3]);
+      done();
+    });
+
     it('[%d] \t\tinvalid input not a number', function(done) {
       var num = sscanf('a', '%d');
       num.should.be.eql(NaN);
