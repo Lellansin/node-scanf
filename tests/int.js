@@ -52,15 +52,33 @@ describe('scanf', function() {
       done();
     });
 
+    it('[%d%d] \t\tshould get an array with two integers [5, null]', function(done) {
+      var num = sscanf('5', '%d%d');
+      should.deepEqual(num, [5, null]);
+      done();
+    });
+
     it('[%d,%d] \tshould get an array with two integers [5, 6]', function(done) {
       var num = sscanf('5,6', '%d,%d');
       should.deepEqual(num, [5, 6]);
       done();
     });
 
+    it('[%d,%d] \tshould get an array with two integers [5, null]', function(done) {
+      var num = sscanf('5,', '%d,%d');
+      should.deepEqual(num, [5, null]);
+      done();
+    });
+
     it('[a=%d, b=%d] \tshould get an array with two integer [5, 6]', function(done) {
       var num = sscanf('a=5, b=6', 'a=%d, b=%d');
       should.deepEqual(num, [5, 6]);
+      done();
+    });
+
+    it('[a=%d, b=%d] \tshould get an array with two integer [5, null]', function(done) {
+      var num = sscanf('a=5', 'a=%d, b=%d');
+      should.deepEqual(num, [5, null]);
       done();
     });
   });

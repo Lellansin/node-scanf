@@ -81,5 +81,11 @@ describe('scanf', function() {
       should.deepEqual(str, ['Alan', '6']);
       done();
     });
+
+    it('[%s %S] \tshould get an array like ["String", null]', function(done) {
+      var str = sscanf('/System/Library/CoreServices/powerd.bundle', '%s %S');
+      should.deepEqual(str, ['/System/Library/CoreServices/powerd.bundle', null]);
+      done();
+    });
   });
 });
