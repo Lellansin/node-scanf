@@ -9,12 +9,12 @@ Do you want a sscanf like function to parse format strings?
 ## Documentation
 
 *  [`Example`](#Example)
-  *  [`Quickly start`](#Quickly start)
-  *  [`C like format`](#C like format)
-*  [`Return`](#Return)
-  *  [`Directly return`](#Directly return)
-  *  [`Array return`](#Array return)
-  *  [`Json return`](#Json return)
+  *  [`Quickly start`](#quickly-start)
+  *  [`C like format`](#c-like-format)
+*  [`Return`](#return)
+  *  [`Directly return`](#directly-return)
+  *  [`Array return`](#array-return)
+  *  [`Json return`](#json-return)
 *  [`sscanf`](#sscanf)
 
 ## Installation
@@ -47,7 +47,7 @@ console.log('your name [%s] type: [%s]', name, typeof name);
 console.log('your age [%s] type: [%s]', age, typeof age);
 ```
 
-Output
+REPL
 
 ```
 Pleas input your name
@@ -69,7 +69,7 @@ var date = scanf('%d-%d-%d');
 console.log('your birthday [%s]', date);
 ```
 
-Output
+REPL
 
 ```
 when are you born? (Year-month-day)
@@ -89,7 +89,7 @@ var number = scanf('%d');
 console.log('number', number);
 ```
 
-Output
+REPL
 
 ```
 >> 2015    
@@ -106,7 +106,7 @@ var result = scanf('%s%d%d');
 console.log('result', result);
 ```
 
-Output
+REPL
 
 ```
 >> Alan 24 180        
@@ -123,7 +123,7 @@ var result = scanf('%d %f %s %x %o', 'integer', 'float', 'string', 'hex', 'octal
 console.log('result', result);
 ```
 
-Output
+REPL
 
 ```
 >> 12 3.1415926 hello 1F 10    
@@ -139,6 +139,7 @@ result {
 ## sscanf
 
 REPL
+
 ```javascript
 >> var sscanf = require('scanf').sscanf;
 undefined
