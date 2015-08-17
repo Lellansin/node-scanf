@@ -40,5 +40,23 @@ describe('scanf', function() {
       });
       done();
     });
+
+    it('a[%x]', function(done) {
+      var str = "a[1A]";
+      var result = sscanf(str,'a[%x]', 'address');
+      should.deepEqual(result, {
+        address: 26
+      });
+      done();
+    });
+
+    it('a(%s)', function(done) {
+      var str = 'a(hello\\ world)';
+      var result = sscanf(str,'a(%s)', 'text');
+      should.deepEqual(result, {
+        text: 'hello world'
+      });
+      done();
+    });
   });
 });
