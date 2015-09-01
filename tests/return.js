@@ -43,7 +43,7 @@ describe('scanf', function() {
 
     it('a[%x]', function(done) {
       var str = "a[1A]";
-      var result = sscanf(str,'a[%x]', 'address');
+      var result = sscanf(str, 'a[%x]', 'address');
       should.deepEqual(result, {
         address: 26
       });
@@ -52,10 +52,24 @@ describe('scanf', function() {
 
     it('a(%s)', function(done) {
       var str = 'a(hello\\ world)';
-      var result = sscanf(str,'a(%s)', 'text');
+      var result = sscanf(str, 'a(%s)', 'text');
       should.deepEqual(result, {
         text: 'hello world'
       });
+      done();
+    });
+
+    it('|%s|%s|%s', function(done) {
+      var str = '|test|hello|string';
+      var result = sscanf(str, '|%s|%s|%s');
+      should.deepEqual(result, ['test', 'hello', 'string']);
+      done();
+    });
+
+    it('|%s|%s|%s|sla|%s|%d', function(done) {
+      var str = '|Server1|CTRL_SLA|Intranet|sla|2015-06-15\\ 16:25:28|100';
+      var result = sscanf(str, '|%s|%s|%s|sla|%s|%d');
+      should.deepEqual(result, ['Server1', 'CTRL_SLA', 'Intranet', '2015-06-15 16:25:28', 100]);
       done();
     });
   });
