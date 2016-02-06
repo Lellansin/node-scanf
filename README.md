@@ -2,9 +2,9 @@
 
 Do you want simplely shell script input which have formats and sync return?
 
-Do you want a sscanf like function to parse format strings?
+Do you want a `sscanf` like function to parse format strings?
 
-`scanf` is a C like scanf module for node.js which can help you with that.
+`scanf` is a C like scanf/sscanf module for node.js which can help you with that.
 
 ## Documentation
 
