@@ -28,6 +28,54 @@ describe('scanf', function() {
       done();
     });
 
+    it('[%ld] \t\tshould get a integer number 3', function(done) {
+      var num = sscanf('3.14', '%ld');
+      should.strictEqual(num, 3);
+      done();
+    });
+
+    it('[%ld] \t\tshould get a integer number -3', function(done) {
+      var num = sscanf('-3.14', '%ld');
+      should.strictEqual(num, -3);
+      done();
+    });
+
+    it('[%lu] \t\tshould get a integer number 3', function(done) {
+      var num = sscanf('3.14', '%lu');
+      should.strictEqual(num, 3);
+      done();
+    });
+
+    it('[%lu] \t\tshould get a integer number -3', function(done) {
+      var num = sscanf('-3.14', '%lu');
+      should.strictEqual(num, -3);
+      done();
+    });
+
+    it('[%llu] \t\tshould get a integer number 3', function(done) {
+      var num = sscanf('3.14', '%llu');
+      should.strictEqual(num, 3);
+      done();
+    });
+
+    it('[%llu] \t\tshould get a integer number -3', function(done) {
+      var num = sscanf('-3.14', '%llu');
+      should.strictEqual(num, -3);
+      done();
+    });
+
+    it('[%u] \t\tshould get a integer number 3', function(done) {
+      var num = sscanf('3.14', '%u');
+      should.strictEqual(num, 3);
+      done();
+    });
+
+    it('[%u] \t\tshould get a integer number -3', function(done) {
+      var num = sscanf('-3.14', '%u');
+      should.strictEqual(num, -3);
+      done();
+    });
+
     it('[%d%d] \t\tshould get [NaN, 3]', function(done) {
       var num = sscanf('a 3.14', '%d%d');
       should.deepEqual(num, [NaN, 3]);
@@ -37,6 +85,18 @@ describe('scanf', function() {
     it('[%d%d] \t\tshould get [NaN, -3]', function(done) {
       var num = sscanf('a -3.14', '%d%d');
       should.deepEqual(num, [NaN, -3]);
+      done();
+    });
+
+    it('[%d%u%d] \t\tshould get [NaN, 3, 14]', function(done) {
+      var num = sscanf('a 3.14', '%d%u%d');
+      should.deepEqual(num, [NaN, 3, 14]);
+      done();
+    });
+
+    it('[%d%u%d] \t\tshould get [NaN, -3, 1]', function(done) {
+      var num = sscanf('a -3.14', '%d%u%d');
+      should.deepEqual(num, [NaN, -3, 14]);
       done();
     });
 
