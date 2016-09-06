@@ -13,6 +13,7 @@
     "test": "mocha --reporter spec",
     "coveralls": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
+  "typings": "./lib/scanf.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/Lellansin/node-scanf.git"
