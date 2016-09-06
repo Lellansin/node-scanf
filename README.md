@@ -161,3 +161,13 @@ undefined
 you can see the ./tests files for more detail.
 
 If there are some formats not support or go broken, you can contact author with email `lellansin@gmail.com`.
+
+# Contributors
+
+  - [lellansin](https://github.com/Lellansin)
+  - [piranna](https://github.com/piranna)
+  - [samchon](https://github.com/samchon)
+
+# License
+
+  MIT
