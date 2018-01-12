@@ -124,18 +124,6 @@ describe('scanf', function() {
       done();
     });
 
-    it('[hex=%d] \tshould get a integer number from hex', function(done) {
-      var num = sscanf('hex=0x10', 'hex=%d');
-      should.strictEqual(num, 16);
-      done();
-    });
-
-    it('[octal=%d] \tshould get a integer number from octal', function(done) {
-      var num = sscanf('octal=010', 'octal=%d');
-      should.strictEqual(num, 8);
-      done();
-    });
-
     it('[%d%d] \t\tshould get an array with two integers [5, 6]', function(done) {
       var num = sscanf('5,6', '%d%d');
       should.deepEqual(num, [5, 6]);
@@ -189,5 +177,55 @@ describe('scanf', function() {
       should.deepEqual(num, [-5, null]);
       done();
     });
+
+    // starts of '0' and not following with 'o' or 'O' or 'x' or 'X' is decimal for %d %ld %u %lu %llu
+    it('[%d] \t\tshould get a integer number 8 from 08', function(done) {
+      var num = sscanf('08', '%d');
+      should.strictEqual(num, 8);
+      done();
+    });
+
+    // starts of '0' and not following with 'o' or 'O' or 'x' or 'X' is decimal for %d %ld %u %lu %llu
+    it('[%d] \t\tshould get a integer number 9 from 09', function(done) {
+      var num = sscanf('09', '%d');
+      should.strictEqual(num, 9);
+      done();
+    });
+
+    // starts of '0' and not following with 'o' or 'O' or 'x' or 'X' is decimal for %d %ld %u %lu %llu
+    it('[%d] \t\tshould get a integer number 12 from 012', function(done) {
+      var num = sscanf('012', '%d');
+      should.strictEqual(num, 12);
+      done();
+    });
+
+    // starts of '0o' or '0O' is octal for %d %ld %u %lu %llu
+    it('[octal=%d] \t\tshould get a integer number 11 from 0o13', function(done) {
+      var num = sscanf('0o13', '%d');
+      should.strictEqual(num, 11);
+      done();
+    });
+
+    // starts of '0o' or '0O' is octal for %d %ld %u %lu %llu
+    it('[octal=%d] \t\tshould get a integer number 12 from 0O14', function(done) {
+      var num = sscanf('0O14', '%d');
+      should.strictEqual(num, 12);
+      done();
+    });
+
+    // starts of '0x' or '0X' is hex for %d %ld %u %lu %llu
+    it('[hex=%d] \t\tshould get a integer number 21 from 0x15', function(done) {
+      var num = sscanf('0x15', '%d');
+      should.strictEqual(num, 21);
+      done();
+    });
+
+    // starts of '0x' or '0X' is hex for %d %ld %u %lu %llu
+    it('[hex=%d] \t\tshould get a integer number 26 from 0X1A', function(done) {
+      var num = sscanf('0X1A', '%d');
+      should.strictEqual(num, 26);
+      done();
+    });
+
   });
 });
