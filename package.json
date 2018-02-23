@@ -4,7 +4,7 @@
   "description": "C like scanf/sscanf module for node.js.",
   "main": "index.js",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">= 4"
   },
   "directories": {
     "test": "test"
