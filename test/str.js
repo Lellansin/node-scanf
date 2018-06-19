@@ -90,7 +90,7 @@ describe('scanf', function() {
     });
 
     it('[%s %f %f] \tshould get an array like ["兴安盟", 122.05, 46.08]', function(done) {
-      let str = sscanf('兴安盟 122.05 46.08', '%s %f %f')
+      var str = sscanf('兴安盟 122.05 46.08', '%s %f %f')
       should.deepEqual(str, ['兴安盟', 122.05, 46.08]);
       done();
     });

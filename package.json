@@ -1,6 +1,6 @@
 {
   "name": "scanf",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "C like scanf/sscanf module for node.js.",
   "main": "index.js",
   "engines": {
