@@ -3,7 +3,6 @@ var should = require('should');
 
 describe('scanf', function() {
   describe('#float', function() {
-
     it('[%f] \t\tshould get a float number 3.14', function(done) {
       var num = sscanf('3.14', '%f');
       should.strictEqual(num, 3.14);
@@ -66,13 +65,13 @@ describe('scanf', function() {
 
     it('[%d%d%d a=%f, b=%f] \tshould get an array with two float [2.5, 3.6]', function(done) {
       var num = sscanf('1 2 3 a=2.5, b=3.6 8', '%d%d%d a=%f, b=%f %d');
-      should.deepEqual(num, [ 1, 2, 3, 2.5, 3.6, 8 ]);
+      should.deepEqual(num, [1, 2, 3, 2.5, 3.6, 8]);
       done();
     });
 
     it('[%d%d%d a=%f, b=%f] \tshould get an array with two float [2.5, -3.6]', function(done) {
       var num = sscanf('1 2 3 a=2.5, b=-3.6 8', '%d%d%d a=%f, b=%f %d');
-      should.deepEqual(num, [ 1, 2, 3, 2.5, -3.6, 8 ]);
+      should.deepEqual(num, [1, 2, 3, 2.5, -3.6, 8]);
       done();
     });
   });

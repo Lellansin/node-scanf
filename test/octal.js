@@ -3,7 +3,6 @@ var should = require('should');
 
 describe('scanf', function() {
   describe('#Octal', function() {
-
     it('[%o] \t\tshould get a number 16', function(done) {
       var num = sscanf('20', '%o');
       should.strictEqual(num, 16);

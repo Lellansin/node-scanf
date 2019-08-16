@@ -4,12 +4,11 @@ var should = require('should');
 describe('scanf', function() {
   describe('#utils', function() {
     describe('#stripslashes', function() {
-
       it('should strip slashes', function(done) {
         var str = 'hello\\ world';
         var r = utils.stripslashes(str);
         should.equal(r, 'hello world');
-        should.equal(r, 'hello\ world');
+        should.equal(r, 'hello world');
         done();
       });
 
@@ -33,7 +32,6 @@ describe('scanf', function() {
         should.equal(r, 'h\be\tl\\lo world@');
         done();
       });
-
     });
   });
 });
