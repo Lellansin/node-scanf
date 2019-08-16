@@ -3,7 +3,6 @@ var should = require('should');
 
 describe('scanf', function() {
   describe('#Hexadecimal', function() {
-
     it('[%x] \t\tshould get a number 32', function(done) {
       var num = sscanf('20', '%x');
       should.strictEqual(num, 32);

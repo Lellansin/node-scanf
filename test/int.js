@@ -3,7 +3,6 @@ var should = require('should');
 
 describe('scanf', function() {
   describe('#integer', function() {
-
     it('[%d] \t\tshould get a integer number 123', function(done) {
       var num = sscanf('123', '%d');
       should.strictEqual(num, 123);
@@ -226,6 +225,5 @@ describe('scanf', function() {
       should.strictEqual(num, 26);
       done();
     });
-
   });
 });

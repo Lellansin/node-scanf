@@ -3,7 +3,6 @@ var should = require('should');
 
 describe('scanf', function() {
   describe('#String', function() {
-
     it('[%s] \t\tshould get a string 123', function(done) {
       var str = sscanf('123', '%s');
       should.strictEqual(str, '123');
@@ -90,7 +89,7 @@ describe('scanf', function() {
     });
 
     it('[%s %f %f] \tshould get an array like ["兴安盟", 122.05, 46.08]', function(done) {
-      var str = sscanf('兴安盟 122.05 46.08', '%s %f %f')
+      var str = sscanf('兴安盟 122.05 46.08', '%s %f %f');
       should.deepEqual(str, ['兴安盟', 122.05, 46.08]);
       done();
     });
@@ -103,7 +102,10 @@ describe('scanf', function() {
 
     it('[%s %S] \tshould get an array like ["String", null]', function(done) {
       var str = sscanf('/System/Library/CoreServices/powerd.bundle', '%s %S');
-      should.deepEqual(str, ['/System/Library/CoreServices/powerd.bundle', null]);
+      should.deepEqual(str, [
+        '/System/Library/CoreServices/powerd.bundle',
+        null,
+      ]);
       done();
     });
   });
