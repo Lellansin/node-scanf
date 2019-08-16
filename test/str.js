@@ -104,7 +104,7 @@ describe('scanf', function() {
       var str = sscanf('/System/Library/CoreServices/powerd.bundle', '%s %S');
       should.deepEqual(str, [
         '/System/Library/CoreServices/powerd.bundle',
-        null,
+        null
       ]);
       done();
     });

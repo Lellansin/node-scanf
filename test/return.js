@@ -24,14 +24,14 @@ describe('scanf', function() {
         'float',
         'string',
         'hex',
-        'octal',
+        'octal'
       );
       should.deepEqual(result, {
         integer: 12,
         float: 3.1415926,
         string: 'hello',
         hex: 31,
-        octal: 8,
+        octal: 8
       });
       done();
     });
@@ -45,7 +45,7 @@ describe('scanf', function() {
         'stat',
         'time',
         'exec',
-        'param',
+        'param'
       );
       should.deepEqual(result, {
         pid: 14,
@@ -53,7 +53,7 @@ describe('scanf', function() {
         stat: 'Ss',
         time: '0:07.59',
         exec: '/usr/sbin/securityd',
-        param: '-i -j -k -l',
+        param: '-i -j -k -l'
       });
       done();
     });
@@ -62,7 +62,7 @@ describe('scanf', function() {
       var str = 'a[1A]';
       var result = sscanf(str, 'a[%x]', 'address');
       should.deepEqual(result, {
-        address: 26,
+        address: 26
       });
       done();
     });
@@ -71,7 +71,7 @@ describe('scanf', function() {
       var str = 'a(hello\\ world)';
       var result = sscanf(str, 'a(%s)', 'text');
       should.deepEqual(result, {
-        text: 'hello world',
+        text: 'hello world'
       });
       done();
     });
@@ -91,7 +91,7 @@ describe('scanf', function() {
         'CTRL_SLA',
         'Intranet',
         '2015-06-15 16:25:28',
-        100,
+        100
       ]);
       done();
     });
