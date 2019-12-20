@@ -1,6 +1,6 @@
 {
   "name": "scanf",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "C like scanf/sscanf module for node.js.",
   "main": "index.js",
   "engines": {
@@ -12,6 +12,7 @@
   "scripts": {
     "prettier": "prettier --write './**/*.js'",
     "test": "mocha --reporter spec",
+    "cov": "npm run coveralls",
     "coveralls": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "typings": "./lib/scanf.d.ts",
