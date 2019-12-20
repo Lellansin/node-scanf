@@ -29,6 +29,7 @@ npm install scanf
 * `%s` - string
 * `%S` - string of line
 * `%x` - hex
+* `%a` - [hex float](https://github.com/Lellansin/node-scanf/issues/24)
 * `%o` - octal
 
 ## Example
