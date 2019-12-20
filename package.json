@@ -2,7 +2,7 @@
   "name": "scanf",
   "version": "1.1.0",
   "description": "C like scanf/sscanf module for node.js.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "engines": {
     "node": ">= 4"
   },
@@ -11,9 +11,11 @@
   },
   "scripts": {
     "prettier": "prettier --write './**/*.js'",
-    "test": "mocha --reporter spec",
-    "cov": "npm run coveralls",
-    "coveralls": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+    "build": "tsc",
+    "test": "npm run build && mocha",
+    "debug": "npm run build && mocha --inspect-brk=9229",
+    "cov": "npm run build && npm run coveralls",
+    "coveralls": "npm run build && istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "typings": "./lib/scanf.d.ts",
   "repository": {
@@ -33,6 +35,7 @@
   },
   "homepage": "https://github.com/Lellansin/node-scanf",
   "devDependencies": {
+    "@types/node": "^12.12.21",
     "coveralls": "^2.11.8",
     "istanbul": "^0.4.2",
     "mocha": "^3.1.2",

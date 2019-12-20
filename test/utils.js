@@ -1,4 +1,4 @@
-var utils = require('../lib/utils');
+var utils = require('../dist/lib/utils');
 var should = require('should');
 
 describe('scanf', function() {

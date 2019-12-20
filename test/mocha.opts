@@ -1,0 +1,6 @@
+--recursive
+--full-trace
+--reporter spec
+--timeout 10000
+--bail
+test/*.js
