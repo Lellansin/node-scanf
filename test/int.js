@@ -225,5 +225,23 @@ describe('scanf', function() {
       should.strictEqual(num, 26);
       done();
     });
+
+    it('[%5d] \t\tshould handle Zero Pad', function(done) {
+      var num = sscanf('00015', '%05d');
+      should.strictEqual(num, 15);
+      done();
+    });
+
+    it('[%5d] \t\tshould handle Zero Pad', function(done) {
+      var num = sscanf('01234', '%05d');
+      should.strictEqual(num, 1234);
+      done();
+    });
+
+    it('[%5d] \t\tshould handle Zero Pad', function(done) {
+      var num = sscanf('123456', '%05d');
+      should.strictEqual(num, 123456);
+      done();
+    });
   });
 });
