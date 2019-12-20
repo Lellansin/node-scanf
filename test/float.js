@@ -75,4 +75,42 @@ describe('scanf', function() {
       done();
     });
   });
+
+  describe('#hex float', function() {
+    it('[%a] \t\tshould get a float number 0x1', function(done) {
+      var num = sscanf('0x1', '%a');
+      should.strictEqual(num, 1.0);
+      done();
+    });
+
+    it('[%a] \t\tshould get a float number 0xa', function(done) {
+      var num = sscanf('0xa', '%a');
+      should.strictEqual(num, 10);
+      done();
+    });
+
+    it('[%a] \t\tshould get a float number 0x.a', function(done) {
+      var num = sscanf('0x.a', '%a');
+      should.strictEqual(num, 0.625);
+      done();
+    });
+
+    it('[%a] \t\tshould get a float number 0xa.a', function(done) {
+      var num = sscanf('0xa.ap0', '%a');
+      should.strictEqual(num, 10.625);
+      done();
+    });
+
+    it('[%a] \t\tshould get a float number 0xa.ap0', function(done) {
+      var num = sscanf('0xa.ap0', '%a');
+      should.strictEqual(num, 10.625);
+      done();
+    });
+
+    it('[%a] \t\tshould get a float number 0xa.ap2', function(done) {
+      var num = sscanf('0xa.ap2', '%a');
+      should.strictEqual(num, 42.5);
+      done();
+    });
+  });
 });
