@@ -5,13 +5,13 @@
 var fs = require('fs');
 
 var BUFSIZE = 256;
-var buf = new Buffer(BUFSIZE);
+var buf = Buffer.alloc(BUFSIZE);
 var bytesRead;
 
-module.exports = function() {
+export function gets() {
   var fd =
     'win32' === process.platform
-      ? process.stdin.fd
+      ? (process.stdin as any).fd
       : fs.openSync('/dev/stdin', 'rs');
   bytesRead = 0;
 
@@ -47,4 +47,4 @@ module.exports = function() {
   var content = buf.toString(undefined, 0, bytesRead - 1);
 
   return content;
-};
+}

@@ -1,12 +1,17 @@
-var utils = require('./utils');
-var gets = require('./gets');
+import { stripslashes, regslashes, hex2int, octal2int } from './utils';
+import { gets } from './gets';
 
 var input = '';
 var stdin_flag = true;
 
-exports.throw = true;
+enum ScanfTypes {
+  string = 'STR',
+  hexFloat = 'HEXFLOAT'
+}
 
-var scanf = (module.exports = function(format) {
+export let THROW = false;
+
+export function scanf(format: string) {
   var re = new RegExp('[^%]*%[0-9]*[A-Za-z][^%]*', 'g');
   var selector = format.match(re);
 
@@ -20,7 +25,7 @@ var scanf = (module.exports = function(format) {
     count = 0,
     keys = Array.prototype.slice.call(arguments, 1);
 
-  if (!this.sscanf) {
+  if (!(this as any)?.sscanf) {
     // clear sscanf cache
     if (!stdin_flag) input = '';
     stdin_flag = true;
@@ -44,9 +49,9 @@ var scanf = (module.exports = function(format) {
   });
 
   return result;
-});
+}
 
-module.exports.sscanf = function(str, format) {
+export function sscanf(str: string, ...args: [string]) {
   if (typeof str !== 'string' || !str.length) {
     return null;
   }
@@ -57,13 +62,15 @@ module.exports.sscanf = function(str, format) {
   input = str;
   stdin_flag = false;
 
-  return scanf.apply(
-    { sscanf: true },
-    Array.prototype.slice.call(arguments, 1)
-  );
-};
+  return scanf.apply({ sscanf: true }, args);
+}
 
-var getInput = function(pre, next, match, type) {
+var getInput = function(
+  pre: string,
+  next: string,
+  match: string,
+  type?: ScanfTypes
+): string | null | Array<string> {
   var result;
   if (!input.length || input === '\r') {
     if (stdin_flag) {
@@ -78,15 +85,15 @@ var getInput = function(pre, next, match, type) {
   var tmp = input;
 
   // while scan string, replace before and after
-  if (type === 'STR' && next.trim().length > 0) {
-    var before_macth = utils.regslashes(pre);
-    var after_match = utils.regslashes(next) + '[\\w\\W]*';
+  if (type === ScanfTypes.string && next.trim().length > 0) {
+    var before_macth = regslashes(pre);
+    var after_match = regslashes(next) + '[\\w\\W]*';
     if (before_macth.length) {
       tmp = tmp.replace(new RegExp(before_macth), '');
     }
     tmp = tmp.replace(new RegExp(after_match), '');
   } else {
-    replace = utils.regslashes(pre) + replace;
+    replace = regslashes(pre) + replace;
   }
 
   var m = tmp.match(new RegExp(replace));
@@ -103,43 +110,49 @@ var getInput = function(pre, next, match, type) {
     .replace(result, '')
     .replace(next, '');
 
-  if (type === 'HEXFLOAT') {
+  if (type === ScanfTypes.hexFloat) {
     return m;
   }
   return result;
 };
 
-var getInteger = function(pre, next) {
+var getInteger = function(pre: string, next: string) {
   var text = getInput(pre, next, '[-]?[A-Za-z0-9]+');
-  if (!text) {
+  if (!text || typeof text !== 'string') {
     return null;
   }
   if (text.length > 2) {
     if (text[0] === '0') {
       if (text[1].toLowerCase() === 'x') {
-        return utils.hex2int(text);
+        return hex2int(text);
       }
       // parse Integer (%d %ld %u %lu %llu) should be precise for octal
       if (text[1].toLowerCase() === 'o') {
-        return utils.octal2int(text);
+        return octal2int(text);
       }
     }
   }
   return parseInt(text);
 };
 
-var getFloat = function(pre, next) {
+var getFloat = function(pre: string, next: string) {
   var text = getInput(pre, next, '[-]?[0-9]+[.]?[0-9]*');
+  if (!text || typeof text !== 'string') {
+    return null;
+  }
   return parseFloat(text);
 };
 
-var getHexFloat = function(pre, next) {
+var getHexFloat = function(pre: string, next: string) {
   var hfParams = getInput(
     pre,
     next,
     '^([+-]?)0x([0-9a-f]*)(.[0-9a-f]*)?(p[+-]?[0-9a-f]+)?',
-    'HEXFLOAT'
+    ScanfTypes.hexFloat
   );
+  if (!hfParams || !Array.isArray(hfParams)) {
+    return null;
+  }
   var sign = hfParams[2];
   var sint = hfParams[3];
   var spoint = hfParams[4];
@@ -156,17 +169,23 @@ var getHexFloat = function(pre, next) {
   return integer * Math.pow(2, exponent);
 };
 
-var getHex = function(pre, next) {
+var getHex = function(pre: string, next: string) {
   var text = getInput(pre, next, '[A-Za-z0-9]+');
-  return utils.hex2int(text);
+  if (!text || typeof text !== 'string') {
+    return null;
+  }
+  return hex2int(text);
 };
 
-var getOctal = function(pre, next) {
+var getOctal = function(pre: string, next: string) {
   var text = getInput(pre, next, '[A-Za-z0-9]+');
-  return utils.octal2int(text);
+  if (!text || typeof text !== 'string') {
+    return null;
+  }
+  return octal2int(text);
 };
 
-var getString = function(pre, next) {
+var getString = function(pre: string, next: string) {
   var text = getInput(
     pre,
     next,
@@ -178,19 +197,25 @@ var getString = function(pre, next) {
       ')' +
       // Match after
       '+(\\\\[\\w\\ ][\\w\\:]*)*',
-    'STR'
+    ScanfTypes.string
   );
-  if (/\\/.test(text)) text = utils.stripslashes(text);
+  if (!text || typeof text !== 'string') {
+    return null;
+  }
+  if (/\\/.test(text)) text = stripslashes(text);
   return text;
 };
 
-var getLine = function(pre, next) {
+var getLine = function(pre: string, next: string) {
   var text = getInput(pre, next, '[^\n\r]*');
-  if (/\\/.test(text)) text = utils.stripslashes(text);
+  if (!text || typeof text !== 'string') {
+    return null;
+  }
+  if (/\\/.test(text)) text = stripslashes(text);
   return text;
 };
 
-var dealType = function(format) {
+var dealType = function(format: string) {
   var ret;
   var res = format.match(/%(0[1-9]+)?[A-Za-z]+/);
   var res2 = format.match(/[^%]*/);
@@ -201,7 +226,7 @@ var dealType = function(format) {
   }
 
   var type = res[0].replace(res[1], '');
-  var pre = !!res2 ? res2[0] : null;
+  var pre = !!res2 ? res2[0] : '';
   var next = format.substr(format.indexOf(type) + type.length);
 
   switch (type) {

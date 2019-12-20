@@ -1,16 +1,16 @@
-var THROW = require('./scanf').throw;
+import { THROW } from './scanf';
 
 var ASCII = {
-  a: 'a'.charCodeAt(),
-  f: 'f'.charCodeAt(),
-  A: 'A'.charCodeAt(),
-  F: 'F'.charCodeAt(),
-  0: '0'.charCodeAt(),
-  7: '7'.charCodeAt(),
-  9: '9'.charCodeAt()
+  a: 'a'.charCodeAt(0),
+  f: 'f'.charCodeAt(0),
+  A: 'A'.charCodeAt(0),
+  F: 'F'.charCodeAt(0),
+  0: '0'.charCodeAt(0),
+  7: '7'.charCodeAt(0),
+  9: '9'.charCodeAt(0)
 };
 
-exports.hex2int = function(str) {
+export function hex2int(str: string) {
   str = str.replace(/^[0Oo][Xx]/, '');
   var ret = 0,
     digit = 0;
@@ -28,11 +28,11 @@ exports.hex2int = function(str) {
   }
 
   return ret;
-};
+}
 
-var intAtHex = function(c, digit) {
+export function intAtHex(c: string, digit: number) {
   var ret = null;
-  var ascii = c.charCodeAt();
+  var ascii = c.charCodeAt(0);
 
   if (ASCII.a <= ascii && ascii <= ASCII.f) {
     ret = ascii - ASCII.a + 10;
@@ -51,9 +51,9 @@ var intAtHex = function(c, digit) {
     ret *= 16;
   }
   return ret;
-};
+}
 
-exports.octal2int = function(str) {
+export function octal2int(str: string) {
   str = str.replace(/^0[Oo]?/, '');
   var ret = 0,
     digit = 0;
@@ -71,11 +71,11 @@ exports.octal2int = function(str) {
   }
 
   return ret;
-};
+}
 
-var intAtOctal = function(c, digit) {
+var intAtOctal = function(c: string, digit: number) {
   var num = null;
-  var ascii = c.charCodeAt();
+  var ascii = c.charCodeAt(0);
 
   if (ascii >= ASCII[0] && ascii <= ASCII[7]) {
     num = ascii - ASCII[0];
@@ -92,16 +92,16 @@ var intAtOctal = function(c, digit) {
   return num;
 };
 
-exports.regslashes = function(pre) {
+export function regslashes(pre: string) {
   return pre
     .replace(/\[/g, '\\[')
     .replace(/\]/g, '\\]')
     .replace(/\(/g, '\\(')
     .replace(/\)/g, '\\)')
     .replace(/\|/g, '\\|');
-};
+}
 
-exports.stripslashes = function(str) {
+export function stripslashes(str: string) {
   return str.replace(/\\([\sA-Za-z\\]|[0-7]{1,3})/g, function(str, c) {
     switch (c) {
       case '\\':
@@ -119,14 +119,17 @@ exports.stripslashes = function(str) {
         return str;
     }
   });
-};
+}
 
-var getASCIIChar = function(str) {
-  var num = exports.octal2int(str);
+var getASCIIChar = function(str: string): string | null {
+  var num = octal2int(str);
+  if (!num) {
+    return null;
+  }
   return String.fromCharCode(num);
 };
 
-var getSpecialChar = function(letter) {
+var getSpecialChar = function(letter: string) {
   switch (letter.toLowerCase()) {
     case 'b':
       return '\b';
