@@ -21,9 +21,9 @@ describe('scanf', function() {
       done();
     });
 
-    it('[%x] \t\tinvalid hex number should get a null', function(done) {
+    it('[%x] \t\tinvalid hex number should get NaN', function(done) {
       var num = sscanf('0x1G0', '%x');
-      should.strictEqual(num, null);
+      num.should.be.eql(NaN);
       done();
     });
 
