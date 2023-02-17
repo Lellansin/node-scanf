@@ -8,71 +8,60 @@ declare module "scanf"
 	export = __node_scanf.scanf;
 }
 
-declare namespace __node_scanf
-{
+declare namespace __node_scanf {
+
+	interface FormatMap {
+		"d": number;
+		"ld": number;
+		"llu": number;
+		"lu": number;
+		"u": number;
+		"X": number;
+		"x": number;
+		"O": number;
+		"o": number;
+		"a": number;
+		"f": number;
+		"c": string;
+		"s": string;
+		"S": string;
+	}
+
+	type NumberStrings = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
+
+	type FormatArrayTrimNumber<S extends string> = S extends `%${NumberStrings}${infer R}`
+		? FormatArrayTrimNumber<`%${R}`>
+		: FormatArray3<S>;
+
+	type FormatArray3<S extends string> = S extends `%${infer K1}${infer K2}${infer K3}${infer R}`
+		? `${K1}${K2}${K3}` extends keyof FormatMap ? [FormatMap[`${K1}${K2}${K3}`], ...FormatArray<R>] : FormatArray2<S>
+		: FormatArray2<S>
+	
+	type FormatArray2<S extends string> = S extends `%${infer K1}${infer K2}${infer R}`
+		? `${K1}${K2}` extends keyof FormatMap ? [FormatMap[`${K1}${K2}`], ...FormatArray<R>] : FormatArray1<S>
+		: FormatArray1<S>
+	
+	type FormatArray1<S extends string> = S extends `%${infer K1}${infer R}`
+		? `${K1}` extends keyof FormatMap ? [FormatMap[`${K1}`], ...FormatArray<R>] : never
+		: never
+	
+	type FormatArray<S extends string> = S extends `${any}%${infer R}`
+		? FormatArrayTrimNumber<`%${R}`>
+		: []
+	
+	type SingleValueOrArray<A extends any[]> = A extends [infer F] ? F : A;
+
+	type Format<S extends string> = SingleValueOrArray<FormatArray<S>>;
+	
+	type GroupJson<A1 extends string[], A2 extends any[]> = A1 extends [] ? {} : A2 extends [] ? {} :
+		A1 extends [infer K1, ...infer R1] ? A2 extends [infer V1, ...infer R2] ? { [K in K1]: V1 } & GroupJson<R1, R2> : {} : {};
+
+	type FormatJson<S extends string, A extends string[]> = GroupJson<A, FormatArray<S>>
+
 	/* ------------------------------------------------------------
 		SCANF - FROM STDIN
 	------------------------------------------------------------ */
-	/**
-	 * <p> Read formatted word from stdin. </p>
-	 * 
-	 * <p> Reads a word from stdin and returns it according to parameter <i>format</i>. </p>
-	 * 
-	 * @param format The format represents a word.
-	 * @return A word.
-	 */
-	function scanf(format: "%s"): string;
 
-	/**
-	 * <p> Read formatted line from stdin. </p>
-	 * 
-	 * <p> Reads a word from stdin and returns it according to parameter <i>format</i>. </p>
-	 * 
-	 * @param format The format represents a word.
-	 * @return A word.
-	 */
-	function scanf(format: "%S"): string;
-
-	/**
-	 * <p> Read formatted integer from stdin. </p>
-	 * 
-	 * <p> Reads an integer from stdin and returns it according to parameter <i>format</i>. </p>
-	 * 
-	 * @param format The format represents an integer value.
-	 * @return An integer.
-	 */
-	function scanf(format: "%d"): number;
-
-	/**
-	 * <p> Read formatted float from stdin. </p>
-	 * 
-	 * <p> Reads a float from stdin and returns it according to parameter <i>format</i>. </p>
-	 * 
-	 * @param format The format represents an float value.
-	 * @return A float.
-	 */
-	function scanf(format: "%f"): number;
-
-	/**
-	 * <p> Read formatted octal from stdin. </p>
-	 * 
-	 * <p> Reads an octal from stdin and returns it according to parameter <i>format</i>. </p>
-	 * 
-	 * @param format The format represents an octal value.
-	 * @return An octal.
-	 */
-	function scanf(format: "%o"): number;
-
-	/**
-	 * <p> Read formatted hex from stdin. </p>
-	 * 
-	 * <p> Reads a hex from stdin and returns it according to parameter <i>format</i>. </p>
-	 * 
-	 * @param format The format represents a hex value.
-	 * @return A hex.
-	 */
-	function scanf(format: "%x"): number;
-	
 	/**
 	 * <p> Reads formatted data from stdin. </p>
 	 * 
@@ -81,7 +70,7 @@ declare namespace __node_scanf
 	 * @param format The format contains a sequence of characters that control how characters extracted from the stream are tread.
 	 * @return An array containing data constructed from stdin with the <i>format</i>.
 	 */
-	function scanf(format: string): Array<number|string>;
+	function scanf<S extends string>(format: S): Format<S>;
 
 	/**
 	 * <p> Reads formatted data from stdin. </p>
@@ -93,85 +82,13 @@ declare namespace __node_scanf
 	 * 
 	 * @return A JSON object containing data constructed from stdin with the <i>format</i> and following <i>names</i>.
 	 */
-	function scanf(format: string, ...names: string[]): Object;
+	function scanf<S extends string, A extends string[]>(format: S, ...names: A): FormatJson<S, A>;
 
 	/* ------------------------------------------------------------
 		SSCANF - FROM SOURCE STRING
 	------------------------------------------------------------ */
-	namespace scanf
-	{
-		/**
-		 * <p> Read formatted word from string. </p>
-		 * 
-		 * <p> Reads a word from <i>source</i> and returns it according to parameter <i>format</i>. </p>
-		 * 
-		 * @param source Source string to retrieve data.
-		 * @param format The format represents a word.
-		 * 
-		 * @return A word.
-		 */
-		function sscanf(source: string, format: "%s"): string;
+	namespace scanf {
 
-		/**
-		 * <p> Read formatted line from string. </p>
-		 * 
-		 * <p> Reads a word from <i>source</i> and returns it according to parameter <i>format</i>. </p>
-		 * 
-		 * @param source Source string to retrieve data.
-		 * @param format The format represents a word.
-		 * 
-		 * @return A word.
-		 */
-		function sscanf(source: string, format: "%S"): string;
-
-		/**
-		 * <p> Read formatted integer from string. </p>
-		 * 
-		 * <p> Reads an integer from <i>source</i> and returns it according to parameter <i>format</i>. </p>
-		 * 
-		 * @param source Source string to retrieve data.
-		 * @param format The format represents an integer value.
-		 * 
-		 * @return An integer.
-		 */
-		function sscanf(source: string, format: "%d"): number;
-
-		/**
-		 * <p> Read formatted float from string. </p>
-		 * 
-		 * <p> Reads a float from <i>source</i> and returns it according to parameter <i>format</i>. </p>
-		 * 
-		 * @param source Source string to retrieve data.
-		 * @param format The format represents an float value.
-		 * 
-		 * @return A float.
-		 */
-		function sscanf(source: string, format: "%f"): number;
-
-		/**
-		 * <p> Read formatted octal from string. </p>
-		 * 
-		 * <p> Reads an octal from <i>source</i> and returns it according to parameter <i>format</i>. </p>
-		 * 
-		 * @param source Source string to retrieve data.
-		 * @param format The format represents an octal value.
-		 * 
-		 * @return An octal.
-		 */
-		function sscanf(source: string, format: "%o"): number;
-
-		/**
-		 * <p> Read formatted hex from string. </p>
-		 * 
-		 * <p> Reads a hex from <i>source</i> and returns it according to parameter <i>format</i>. </p>
-		 * 
-		 * @param source Source string to retrieve data.
-		 * @param format The format represents a hex value.
-		 * 
-		 * @return A hex.
-		 */
-		function sscanf(source: string, format: "%x"): number;
-		
 		/**
 		 * <p> Reads formatted data from string. </p>
 		 * 
@@ -182,7 +99,7 @@ declare namespace __node_scanf
 		 * 
 		 * @return An array containing data constructed from string with the <i>format</i>.
 		 */
-		function sscanf(source: string, format: string): Array<number|string>;
+		function sscanf<S extends string>(source: string, format: S): Format<S>;
 
 		/**
 		 * <p> Reads formatted data from string. </p>
@@ -195,6 +112,6 @@ declare namespace __node_scanf
 		 * 
 		 * @return A JSON object containing data constructed from string with the <i>format</i> and following <i>names</i>.
 		 */
-		function sscanf(source: string, format: string, ...names: string[]): Object;
+		function sscanf<S extends string, A extends string[]>(source: string, format: S, ...names: A): FormatJson<S, A>;
 	}
 }
