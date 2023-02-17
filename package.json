@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/Lellansin/node-scanf",
   "devDependencies": {
-    "coveralls": "^2.11.8",
+    "coveralls": "^3.1.1",
     "istanbul": "^0.4.2",
     "mocha": "^10.2.0",
     "prettier": "^1.18.2",
