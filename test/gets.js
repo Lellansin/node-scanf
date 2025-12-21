@@ -1,21 +1,19 @@
-var fs = require('fs');
 var should = require('should');
 
 var getsPath = require.resolve('../lib/gets');
-var originalOpenSync = fs.openSync;
-var originalReadSync = fs.readSync;
+var fs = require('fs');
 
 describe('gets', function() {
   afterEach(function() {
     delete require.cache[getsPath];
-    fs.openSync = originalOpenSync;
-    fs.readSync = originalReadSync;
   });
 
   function loadGetsWith(stubs) {
-    Object.assign(fs, stubs);
     delete require.cache[getsPath];
-    return require('../lib/gets');
+    var getsModule = require('../lib/gets');
+
+    var localFs = Object.assign({}, fs, stubs);
+    return getsModule.withFs(localFs);
   }
 
   it('should return empty string when no bytes are read', function() {
