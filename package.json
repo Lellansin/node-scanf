@@ -11,7 +11,7 @@
   },
   "scripts": {
     "prettier": "prettier --write './**/*.js'",
-    "test": "mocha --reporter spec",
+    "test": "mocha",
     "cov": "npm run coveralls",
     "coveralls": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },

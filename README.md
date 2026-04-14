@@ -1,4 +1,4 @@
-# node-scanf [![NPM Version](https://badge.fury.io/js/scanf.svg)](http://badge.fury.io/js/scanf) [![Build Status](https://travis-ci.org/Lellansin/node-scanf.png?branch=master)](https://travis-ci.org/Lellansin/node-scanf) [![Coveralls Status](https://img.shields.io/coveralls/Lellansin/node-scanf/master.svg)](https://coveralls.io/github/Lellansin/node-scanf)
+# node-scanf [![NPM Version](https://badge.fury.io/js/scanf.svg)](http://badge.fury.io/js/scanf) [![CI](https://github.com/Lellansin/node-scanf/actions/workflows/ci.yml/badge.svg)](https://github.com/Lellansin/node-scanf/actions/workflows/ci.yml)
 
 Do you want simplely shell script input which have formats and sync return?
 
