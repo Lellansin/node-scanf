@@ -35,7 +35,7 @@
   "devDependencies": {
     "coveralls": "^2.11.8",
     "istanbul": "^0.4.2",
-    "mocha": "^5.2.0",
+    "mocha": "^11.7.5",
     "prettier": "^1.18.2",
     "should": "^11.1.1"
   }
