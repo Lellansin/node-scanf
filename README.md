@@ -22,6 +22,18 @@ Do you want a `sscanf` like function to parse format strings?
 npm install scanf
 ```
 
+## CI
+
+The project is tested on GitHub Actions across the following platforms:
+
+| OS       | Node.js versions              |
+|----------|-------------------------------|
+| Ubuntu   | 4.x ~ 22.x                    |
+| Windows  | 4.x ~ 22.x                    |
+| macOS    | 16.x ~ 22.x (arm64)           |
+
+> macOS CI only covers Node.js 16+ because the latest macOS runner (`macos-latest`) runs on Apple Silicon (arm64), which does not provide prebuilt binaries for older Node.js versions. The Intel-based `macos-13` runner is no longer available.
+
 ## Format support now
 
 * `%d` - integer
