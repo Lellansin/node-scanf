@@ -60,4 +60,21 @@ describe('gets', function() {
     var result = gets();
     should.strictEqual(result, 'hello');
   });
+
+  it('should not call openSync (prevents fd leak #46)', function() {
+    var openSyncCalled = false;
+    var gets = loadGetsWith({
+      openSync: function() {
+        openSyncCalled = true;
+        throw new Error('openSync should not be called');
+      },
+      readSync: function() {
+        return 0;
+      }
+    });
+
+    var result = gets();
+    should.strictEqual(result, '');
+    should.strictEqual(openSyncCalled, false, 'openSync is called — fd leak is present');
+  });
 });
