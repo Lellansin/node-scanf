@@ -43,19 +43,8 @@ jobs:
             node-version: "10.x"
           - os: windows-latest
             node-version: "12.x"
-          - os: macos-13
-            node-version: "4.x"
-          - os: macos-13
-            node-version: "6.x"
-          - os: macos-13
-            node-version: "8.x"
-          - os: macos-13
-            node-version: "10.x"
-          - os: macos-13
-            node-version: "12.x"
-          - os: macos-13
-            node-version: "14.x"
         exclude:
+          # Node 14 has no prebuilt binary for macOS arm64
           - os: macos-latest
             node-version: "14.x"
     steps:
