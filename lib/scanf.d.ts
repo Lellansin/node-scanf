@@ -90,6 +90,12 @@ declare namespace __node_scanf {
 	namespace scanf {
 
 		/**
+		 * Returns whether the most recent scanf operation attempted to read from
+		 * stdin and reached the end of the input stream.
+		 */
+		function isEOF(): boolean;
+
+		/**
 		 * <p> Reads formatted data from string. </p>
 		 * 
 		 * <p> Reads data from <i>source</i> and stores them according to the parameter <i>format</i> into an array to be returned. </p>
