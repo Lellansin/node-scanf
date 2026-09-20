@@ -15,6 +15,7 @@ Do you want a `sscanf` like function to parse format strings?
   *  [`Directly return`](#directly-return)
   *  [`Array return`](#array-return)
   *  [`Json return`](#json-return)
+  *  [`Detect end of input`](#detect-end-of-input)
 *  [`sscanf`](#sscanf)
 
 ## Installation
@@ -148,6 +149,30 @@ result {
   octal: 8 
 }
 ```
+
+### Detect end of input
+
+After calling `scanf()`, use `scanf.isEOF()` to check whether the read reached
+the end of standard input. This is different from an empty line or input that
+does not match the requested format.
+
+```javascript
+var scanf = require('scanf');
+
+while (true) {
+  var values = scanf('%d %d %d');
+
+  if (scanf.isEOF()) {
+    break;
+  }
+
+  console.log(values[0], values[1], values[2]);
+}
+```
+
+EOF is reported only after a read attempts to go past the available input. In
+a terminal, send EOF with `Ctrl+D` on macOS/Linux, or `Ctrl+Z` followed by
+Enter on Windows.
 
 ## sscanf
 
