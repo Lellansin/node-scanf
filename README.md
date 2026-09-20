@@ -15,6 +15,7 @@ Do you want a `sscanf` like function to parse format strings?
   *  [`Directly return`](#directly-return)
   *  [`Array return`](#array-return)
   *  [`Json return`](#json-return)
+  *  [`Detect end of input`](#detect-end-of-input)
 *  [`sscanf`](#sscanf)
 
 ## Installation
